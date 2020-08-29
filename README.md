@@ -1,8 +1,8 @@
 # Go
 
-[Documentation](https://golang.org/doc/)
-
-[A Tour of Go](https://tour.golang.org/list)
+- [Documentation](https://golang.org/doc/)
+- [A Tour of Go](https://tour.golang.org/list)
+- [Go by Example](https://gobyexample.com/)
 
 ## CLI commands
 
