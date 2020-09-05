@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"sort"
 	"time"
 )
 
@@ -67,9 +69,29 @@ func main() {
 		fmt.Println("You are an adult")
 	}
 
+	if _, err := os.Stat("./hello.go"); err != nil {
+		fmt.Println("os.Stat error:", err)
+	}
+
 	// switch-case
-	switch age {
+	switch age { // switch age := 30; age {
 	case 30:
+		fmt.Println("You are 30")
+	case 40, 50, 60:
+		if age == 40 {
+			fmt.Println("You are 40")
+			break // exit from case
+		}
+
+		fmt.Println("You are older than 30")
+		fallthrough // go to the next case
+	default:
+		fmt.Println("You are not 30")
+	}
+
+	// it looks like if-else
+	switch {
+	case age == 30:
 		fmt.Println("You are 30")
 	default:
 		fmt.Println("You are not 30")
@@ -109,9 +131,17 @@ func main() {
 	// slices
 
 	var slice1 []int
+	// slice1 := make([]int) // len 1 by default, cap = len
+	// slice1 := make([]int, 2) // len 2, cap = len
+	// slice1 := make([]int, 2, 3) // len 2, cap 3
 	slice1 = append(slice1, 10)
+	slice1 = append(slice1, 30)
 	slice1 = append(slice1, 20)
 	fmt.Println("slice 1:", slice1, len(slice1), cap(slice1))
+
+	// sort slice
+	sort.Ints(slice1)
+	fmt.Println("sorted slice 1:", slice1)
 
 	slice2 := []int{100, 200, 300, 400, 500, 600}
 	fmt.Println("slice 2:", slice2, len(slice2), cap(slice2), slice2[:2])
@@ -123,19 +153,38 @@ func main() {
 	slice1 = append(slice1, slice2...)
 	fmt.Println("slice 1 after ...", slice1, len(slice1), cap(slice1))
 
+	// create slice with defined cap - use append without re-creation array
+	slice3 := make([]int, 0, 8) // len 0, cap 8
+	fmt.Println("slice 3", slice3, len(slice3), cap(slice3))
+
+	// create slice from array
+	agesSlice := ages[:]
+	fmt.Println("agesSlice", agesSlice, len(agesSlice), cap(agesSlice))
+
 	// maps
 
 	// sites := map[string]int{}
-	sites := make(map[string]int)
+	sites := make(map[string]int) // len 1 by default
+	// sites := make(map[string]int, 2) // len 2
 	sites["google"] = 100
 	sites["yandex"] = 80
 	sites["duckduckgo"] = 60
 
 	// delete key
 	delete(sites, "yandex")
-	// check existing
-	yandex, exists := sites["yandex"]
-	if exists {
+
+	/*
+		// check existing key - option 1
+		yandex, exists := sites["yandex"]
+		if exists {
+			fmt.Println("yandex:", yandex)
+		} else {
+			fmt.Println("yandex does not exist")
+		}
+	*/
+
+	// check existing key - option 2
+	if yandex, exists := sites["yandex"]; exists {
 		fmt.Println("yandex:", yandex)
 	} else {
 		fmt.Println("yandex does not exist")
@@ -148,6 +197,9 @@ func main() {
 	for k, v := range sites {
 		fmt.Printf("sites Map: key - %v, value - %v\n", k, v)
 	}
+
+	// it creates new link to the same map
+	// sites2 := sites
 
 	// functions
 
