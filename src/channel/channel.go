@@ -97,3 +97,18 @@ func Consume(ch chan int) {
 		fmt.Println("async buffered channel:", n)
 	}
 }
+
+// CombineStringChannels combines list of string channels into one
+func CombineStringChannels(channels []<-chan string) <-chan string {
+	combiner := make(chan string)
+
+	for _, channel := range channels {
+		go func() {
+			for {
+				combiner <- <-channel
+			}
+		}()
+	}
+
+	return combiner
+}

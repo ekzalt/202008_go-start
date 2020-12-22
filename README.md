@@ -26,6 +26,10 @@ go doc fmt Printf
 # run tests
 go test
 go test -v
+# run test by strict name
+go test -run TestSumAndMult
+# run tests by RegExp
+go test -run TestSum -v
 ```
 
 ## ENV

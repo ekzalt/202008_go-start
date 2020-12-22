@@ -274,6 +274,10 @@ func main() {
 	andrew := Android{Human{"Andrew", 1, 200, 200}, "Release 1"}
 	andrew.TakeWorld()
 	fmt.Println("Andrew is Android:", andrew)
+
+	// type assertion
+
+	CastWarriorToAndroid(andrew)
 }
 
 // functions
@@ -373,6 +377,29 @@ type Warrior interface {
 }
 
 // TakeWorld prints phrase
-func (a *Android) TakeWorld() {
+func (a Android) TakeWorld() {
 	fmt.Println("I am the king of the world")
+}
+
+// type assertion
+
+// CastWarriorToAndroid casting Warrior interface to Android struct
+func CastWarriorToAndroid(warrior Warrior) {
+	warrior.TakeWorld()
+
+	// do not do this - may raise panic
+	// android := warrior.(Android)
+
+	// try cast with Go type assertion
+	if android, ok := warrior.(Android); ok {
+		fmt.Println("cast success", android.Model)
+	}
+
+	// switch type assertion
+	switch any := warrior.(type) {
+	case Android:
+		fmt.Println("This is type Android", any.Model)
+	default:
+		fmt.Println("This is unknown type")
+	}
 }
