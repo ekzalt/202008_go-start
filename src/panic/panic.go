@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"runtime"
 )
@@ -29,4 +30,17 @@ func CatchPanic() {
 		runtime.Stack(buffer, false)
 		fmt.Println("panic stack trace", string(buffer))
 	}
+}
+
+// SomeFunc is a function with error handling inside
+func SomeFunc() {
+	// this is catching of error
+	defer func() {
+		if recover() != nil {
+			err := errors.New("Some error text here")
+			fmt.Println(err)
+		}
+	}()
+
+	// some important logic here, can thow error
 }

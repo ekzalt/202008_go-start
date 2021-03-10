@@ -8,12 +8,14 @@ import (
 )
 
 func main() {
-	// one line comment
-
 	/*
-		multi
-		line
-		comment
+		link types in Go:
+
+		array
+		slice
+		map
+		pointer
+		channel
 	*/
 
 	// constants
@@ -298,6 +300,17 @@ func SumAll(args ...int) int {
 	return acc
 }
 
+// recursion
+
+// Fibo is recursive calculation
+func Fibo(n int) int {
+	if n < 2 {
+		return n
+	}
+
+	return Fibo(n-1) + Fibo(n-2)
+}
+
 // closures
 
 // GenerateCounter generates incremental counter
@@ -402,4 +415,19 @@ func CastWarriorToAndroid(warrior Warrior) {
 	default:
 		fmt.Println("This is unknown type")
 	}
+}
+
+// binary shift
+
+// PowerOfTwo is binary shift
+func PowerOfTwo(v int) int {
+	v--
+	v |= v >> 1
+	v |= v >> 2
+	v |= v >> 4
+	v |= v >> 8
+	v |= v >> 16
+	v++
+
+	return v
 }

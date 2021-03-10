@@ -37,7 +37,12 @@ func main() {
 	fmt.Println("strings.ToUpper", strings.ToUpper("lower"))
 	fmt.Println("strings.TrimSpace", strings.TrimSpace("   space   "))
 
-	// regexp
+	/*
+		regexp
+
+		you should compile your RegExp first
+		using RegExp in runtime results bag performance
+	*/
 
 	reg, err := regexp.Compile("@")
 
@@ -46,4 +51,8 @@ func main() {
 	}
 
 	fmt.Println("regexp", reg.FindStringSubmatch("company@email.com"))
+
+	var source = "Hello World"
+	var re = regexp.MustCompile("World")
+	fmt.Println(source, re.MatchString(source))
 }

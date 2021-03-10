@@ -45,6 +45,8 @@ func main() {
 type LoginRequest struct {
 	Username string `json:"username"` // `json:"username,omitempty"` omitempty - exclude uninitialized field from json
 	Password string `json:"password"`
+	// Secret   string `json:"-"` // this field will not be taken from input json
+	// Inner json.RawMessage `json:"inner"` // alias of slice bytes
 }
 
 /*
