@@ -12,8 +12,8 @@ func main() {
 
 	strNum := "42"
 	num, err := strconv.ParseInt(strNum, 10, 64)
-	// strconv.Atoi // "42" -> 42
-	// strconv.Itoa // 42-> "42"
+	// strconv.Atoi(strNum) // "42" -> 42
+	// strconv.Itoa(num) // 42-> "42"
 
 	if err != nil {
 		panic(err)

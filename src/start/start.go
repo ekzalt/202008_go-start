@@ -7,6 +7,12 @@ import (
 	"time"
 )
 
+var fiboCache map[int]int
+
+func init() {
+	fiboCache = make(map[int]int)
+}
+
 func main() {
 	/*
 		link types in Go:
@@ -302,13 +308,20 @@ func SumAll(args ...int) int {
 
 // recursion
 
-// Fibo is recursive calculation
+// Fibo is recursive calculation with memoization
 func Fibo(n int) int {
 	if n < 2 {
 		return n
 	}
 
-	return Fibo(n-1) + Fibo(n-2)
+	if cached, exists := fiboCache[n]; exists {
+		return cached
+	}
+
+	sum := Fibo(n-1) + Fibo(n-2)
+	fiboCache[n] = sum
+
+	return sum
 }
 
 // closures
